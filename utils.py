@@ -22,7 +22,7 @@ def evaluate_params():
 	parser.add_argument('--model', type=str, default='bilstm')
 	parser.add_argument('--gpu', type=int, default=0)
 	parser.add_argument('--batch_size', type=int, default=128)
-	parser.add_argument('--save_path', type=str, default = "save/bilstm-model.pt")
+	parser.add_argument('--save_path', type=str, default = "save/bilstm-snli-model.pt")
 	args = parser.parse_args()
 	return args
 

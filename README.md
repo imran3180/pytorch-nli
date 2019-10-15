@@ -3,7 +3,7 @@ Evaluation and comparison of various models on nli(SNLI and MNLI dataset).
 
 Model | SNLI | MNLI 
 ----|----|----|
-`bilstm model` | 87.6 | - |
+`bilstm model` | 73.463 | - |
 
 This repository is written using Pytorch and Torchtext.
 
