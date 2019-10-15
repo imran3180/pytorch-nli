@@ -10,18 +10,19 @@ class BiLSTM(nn.Module):
 		self.embedding = nn.Embedding(options['vocab_size'], options['embed_dim'])
 		self.projection = nn.Linear(options['embed_dim'], 300)
 		self.dropout = nn.Dropout(p = options['dp_ratio'])
+		self.lstm = nn.LSTM(300, options['d_hidden'], 3)
 		self.relu = nn.ReLU()
 		self.out = nn.Sequential(
-			nn.Linear(600, 600),
+			nn.Linear(1024, 1024),
 			self.relu,
 			self.dropout,
-			nn.Linear(600, 600),
+			nn.Linear(1024, 1024),
 			self.relu,
 			self.dropout,
-			nn.Linear(600, 600),
+			nn.Linear(1024, 1024),
 			self.relu,
 			self.dropout,
-			nn.Linear(600, options['out_dim'])
+			nn.Linear(1024, options['out_dim'])
 		)
 		pass
 
@@ -30,8 +31,10 @@ class BiLSTM(nn.Module):
 		hypothesis_embed = self.embedding(batch.hypothesis)
 		premise_proj = self.relu(self.projection(premise_embed))
 		hypothesis_proj = self.relu(self.projection(hypothesis_embed))
-		premise = premise_proj.sum(dim = 1)
-		hypothesis = hypothesis_proj.sum(dim = 1)
+		encoded_premise, _ = self.lstm(premise_proj)
+		encoded_hypothesis, _ = self.lstm(hypothesis_proj)
+		premise = encoded_premise.sum(dim = 1)
+		hypothesis = encoded_hypothesis.sum(dim = 1)
 		combined = torch.cat((premise, hypothesis), 1)
 		return self.out(combined)
 

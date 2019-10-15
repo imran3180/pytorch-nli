@@ -29,9 +29,10 @@ class Train():
 		self.dataset = datasets.__dict__[self.args.dataset](self.dataset_options)
 		self.model_options = {
 									'vocab_size': self.dataset.vocab_size(), 
-									'embed_dim': self.args.embed_dim, 
+									'embed_dim': self.args.embed_dim,
 									'out_dim': self.dataset.out_dim(),
-									'dp_ratio': self.args.dp_ratio
+									'dp_ratio': self.args.dp_ratio,
+									'd_hidden': self.args.d_hidden
 								}
 		self.model = models.__dict__[self.args.model](self.model_options)
 		self.model.to(self.device)
@@ -90,7 +91,7 @@ class Train():
 			val_loss, val_acc = self.validate()
 			if self.args.save_model:
 				self.save_model(val_acc)
-			print("time taken: {}   epoch: {}   Training loss: {}   Training Accuracy: {}   Validation loss: {}   Validation loss: {}".format(
+			print("time taken: {}   epoch: {}   Training loss: {}   Training Accuracy: {}   Validation loss: {}   Validation Accuracy: {}".format(
 				round(time.time()-start, 2), epoch, round(train_loss, 3), round(train_acc, 3), round(val_loss, 3), round(val_acc, 3)
 			))
 
