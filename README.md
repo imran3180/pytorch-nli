@@ -2,8 +2,13 @@
 This repository aims for providing all the baseline models for Natural Language Inference(NLI) task. The main objective of this repository is to provide extensible code structure and framework for working on NLI tasks. This repository can be taken and used to train various combination of models and datasets. Evaluation on trained model and pre-trained model can also be done. This repository is written using Pytorch and Torchtext.
 
 
-Evaluation and comparison of various models on nli(SNLI and MultiNLI dataset).
+#### Supported Options
+Model | Dataset
+|---|---|
+| BiLSTM | SNLI
+|   -  | MultiNLI
 
+#### Results
 Model | snli-validation | snli-test | pretrained-model
 ----|----|----|----|
 `BiLSTM ` | 84.24 | 62.419 | download link |
@@ -15,44 +20,14 @@ Model | mnli-dev-matched | mnli-dev-mismatched | pretrained-model
 ## Setup
 ### Requirement
 
-## Dataset
-1) Stanford Natural Language Inference ([SNLI](https://nlp.stanford.edu/projects/snli/))
-	* SNLI dataset is supported by torchtext so you don't have to download it explicitly. torchtext dataset will download it locally in the .data/ folder when program will run for the first time.
-2) Multi-Genre Natural Language Inference ([MultiNLI](https://www.nyu.edu/projects/bowman/multinli/))
-	* MultiNLI dataset is supported by torchtext so you don't have to download it explicitly. torchtext dataset will download it locally in the .data/ folder wheb program will run for the first time.
+### Integrated Datasets
+1) Stanford Natural Language Inference [[website]](https://nlp.stanford.edu/projects/snli/) [[paper]](https://nlp.stanford.edu/pubs/snli_paper.pdf)
+2) Multi-Genre Natural Language Inference [[website]](https://www.nyu.edu/projects/bowman/multinli/)[[paper]](https://cims.nyu.edu/~sbowman/multinli/paper.pdf)
 
 ## Training
 ```shell
   python train.py --dataset=snli --model=bilstm
 ```
-#### Parameters:
-Name | Description | Default Value
----|---|---|
-`dataset` | Dataset name | snli
-`model` | Model name | bilstm
-`gpu` | GPU number, if GPU is present | 0
-`batch_size` | Size of each batch for training, validation and test Iterator | 128
-`embed_dim` | Embedding size of the word representation | 300
-`d_hidden` | Hidden size in lstm | 512
-`dp_ratio` | dropout ratio in linear layers | 0.2
-`epochs` | # of epochs required for the training | 50
-`lr` | Learning rate | 0.001
-`combine` | Method to combine the premise and hypothesis | cat
-
-#### Supported Options
-Model | Dataset
-|---|---|
-| lstm | SNLI
-|   -  | MultiNLI
-
-
-### Pre-Trained Model
-
-Model | dataset | Test Accuracy | batch_size, embed_dim, d_hidden, dp_ratio, epochs, lr, combine
----|---|---|---|
-`bilstm model` | SNLI | 78.746 | ( 128, 300, 512, 0.2, 50, 0.001, 'cat' )
-`bilstm model` | MultiNLI | 62.419 | ( 128, 300, 512, 0.2, 50, 0.001, 'cat' )
-
 
 ## Evaluation
 ```shell
@@ -80,8 +55,7 @@ Print the confusion matrix for the model prediction. It will help in calculating
 |        total         |      3532.0     |       3148.0       |    3144.0    | 9824.0 |
 +----------------------+-----------------+--------------------+--------------+--------+
 ```
-#### Examples
-For every combination of prediction and actual label it will print the top-k examples from the dataset. This will help in analyzing the model performance. 
 
+## Evaluate on Pre-trained models
 
 ## Contribution
