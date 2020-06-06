@@ -1,15 +1,16 @@
 # pytorch-nli
+This repository aims for providing all the baseline models for Natural Language Inference(NLI) task. The main objective of this repository is to provide extensible code structure and framework for working on NLI tasks. This repository can be taken and used to train various combination of models and datasets. Evaluation on trained model and pre-trained model can also be done. This repository is written using Pytorch and Torchtext.
+
+
 Evaluation and comparison of various models on nli(SNLI and MultiNLI dataset).
 
-Model | SNLI | MultiNLI 
-----|----|----|
-`bilstm model` | 78.746 | 62.419 |
-* table contains the test accuracy
+Model | snli-validation | snli-test | pretrained-model
+----|----|----|----|
+`BiLSTM ` | 84.24 | 62.419 | download link |
 
-This repository is written using Pytorch and Torchtext.
-
-## Objective
-The main objective of this repository is to provide extensible code structure and framework for working on NLI tasks. This repository can be taken and used to train various different models with minimal changes in the code.
+Model | mnli-dev-matched | mnli-dev-mismatched | pretrained-model
+----|----|----|----|
+`BiLSTM ` | 70.63 | 62.419 | download link |
 
 ## Setup
 ### Requirement

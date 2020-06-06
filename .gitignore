@@ -1,4 +1,8 @@
 __pycache__/
+*__pycache__/
 todo.txt
 .data/
-save/
+.vector_cache/
+todo.yml
+*.pt
+run.sbatch
