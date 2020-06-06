@@ -13,7 +13,7 @@ def parse_args():
 	parser.add_argument('--d_hidden', type=int, default=200)
 	parser.add_argument('--dp_ratio', type=int, default=0.2)
 	parser.add_argument('--epochs', type=int, default=20)
-	parser.add_argument('--lr', type=float, default=0.0001)
+	parser.add_argument('--lr', type=float, default=0.001)
 	parser.add_argument('--combine', type=str, default='cat')
 	parser.add_argument('--results_dir', type=str, default='results')
 	return check_args(parser.parse_args())

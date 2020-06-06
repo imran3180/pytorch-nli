@@ -6,3 +6,4 @@ todo.txt
 todo.yml
 *.pt
 run.sbatch
+results/

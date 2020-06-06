@@ -5,55 +5,70 @@ This repository aims for providing all the baseline models for Natural Language 
 #### Supported Options
 Model | Dataset
 |---|---|
-| BiLSTM | SNLI
-|   -  | MultiNLI
+| BiLSTM | SNLI [[Website]](https://nlp.stanford.edu/projects/snli/) [[Paper]](https://nlp.stanford.edu/pubs/snli_paper.pdf)
+|   -  | MultiNLI [[Website]](https://www.nyu.edu/projects/bowman/multinli/) [[Paper]](https://cims.nyu.edu/~sbowman/multinli/paper.pdf)
 
 #### Results
 Model | snli-validation | snli-test | pretrained-model
 ----|----|----|----|
 `BiLSTM ` | 84.24 | 62.419 | download link |
 
-Model | mnli-dev-matched | mnli-dev-mismatched | pretrained-model
+Model | multinli-dev-matched | multinli-dev-mismatched | pretrained-model
 ----|----|----|----|
 `BiLSTM ` | 70.63 | 62.419 | download link |
 
 ## Setup
-### Requirement
-
-### Integrated Datasets
-1) Stanford Natural Language Inference [[website]](https://nlp.stanford.edu/projects/snli/) [[paper]](https://nlp.stanford.edu/pubs/snli_paper.pdf)
-2) Multi-Genre Natural Language Inference [[website]](https://www.nyu.edu/projects/bowman/multinli/)[[paper]](https://cims.nyu.edu/~sbowman/multinli/paper.pdf)
 
 ## Training
 ```shell
-  python train.py --dataset=snli --model=bilstm
+  # Training a BiLSTM model on snli dataset
+  python train.py -m bilstm -d snli
+  
+  # Training a BiLSTM model on multinli dataset
+  python train.py -m bilstm -d multinli
 ```
 
 ## Evaluation
 ```shell
-  python evaluate.py --dataset=snli --model=bilstm --save_path=save/bilstm-snli-model.pt
+  # Evaluating a trained BiLSTM model on snli dataset
+  python evaluate.py -m bilstm -d snli
+  
+  # Evalauting a trained BiLSTM model on multinli dataset
+  python evaluate.py -m bilstm -d multinli
 ```
-Evaluation script will print following metrics for the model(bilstm) and dataset(snli):
-#### Test Accuracy
-Test accuracy of save model on requested dataset. Additionally, It will give the label-wise accuracy for that pair of model and dataset
-```shell
-Validation_accuracy = 80.035, Test loss = 0.591, Test accuracy = 78.746
-label: entailment           Accuracy: 84.175
-label: contradiction        Accuracy: 79.147
-label: neutral              Accuracy: 72.662
+
+Evaluation script will print and log(evaluation.log can be found in results_dir) following metrics:
+#### Accuracy
+```ruby
++------------+----------+
+|            | accuracy |
++------------+----------+
+| validation |  77.271  |
+|    test    |  77.412  |
++------------+----------+
+```
+
+#### Label wise Accuracy
+```ruby
++---------------+----------+
+|     label     | accuracy |
++---------------+----------+
+|   entailment  |  85.986  |
+| contradiction |  73.525  |
+|    neutral    |  72.352  |
++---------------+----------+
 ```
 
 #### Confusion Matrix
-Print the confusion matrix for the model prediction. It will help in calculating precision-recall and other metrics
-```shell
-+----------------------+-----------------+--------------------+--------------+--------+
-|        Table         | entailment-pred | contradiction-pred | neutral-pred | total  |
-+----------------------+-----------------+--------------------+--------------+--------+
-|  entailment-actual   |      2835.0     |       180.0        |    353.0     | 3368.0 |
-| contradiction-actual |      223.0      |       2562.0       |    452.0     | 3237.0 |
-|    neutral-actual    |      474.0      |       406.0        |    2339.0    | 3219.0 |
-|        total         |      3532.0     |       3148.0       |    3144.0    | 9824.0 |
-+----------------------+-----------------+--------------------+--------------+--------+
+```ruby
++----------------------+-----------------+--------------------+--------------+-------+
+|   confusion-matrix   | entailment-pred | contradiction-pred | neutral-pred | total |
++----------------------+-----------------+--------------------+--------------+-------+
+|  entailment-actual   |       2896      |        121         |     351      |  3368 |
+| contradiction-actual |       358       |        2380        |     499      |  3237 |
+|    neutral-actual    |       589       |        301         |     2329     |  3219 |
+|        total         |       3843      |        2802        |     3179     |  9824 |
++----------------------+-----------------+--------------------+--------------+-------+
 ```
 
 ## Evaluate on Pre-trained models
