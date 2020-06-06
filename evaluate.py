@@ -85,7 +85,7 @@ class Evaluate():
 	def execute(self):
 		_, test_acc, confusion_matrix = self.evaluate()
 		table = PrettyTable()
-		table.field_names = ["", "accuracy"]
+		table.field_names = ["data", "accuracy"]
 		table.add_row(["validation", round(self.validation_accuracy, 3)])
 		table.add_row(["test", round(test_acc, 3)])
 		print(table)

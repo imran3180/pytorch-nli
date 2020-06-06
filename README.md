@@ -18,6 +18,21 @@ Model | multinli-dev-matched | multinli-dev-mismatched | pretrained-model
 `BiLSTM ` | 70.63 | 62.419 | download link |
 
 ## Setup
+#### conda:
+```shell
+conda env create -f environment.yml
+
+# To download the english tokenizer from SpaCy
+python -m spacy download en
+```
+#### pip:
+```shell
+pip install -r requirements.txt
+
+# To download the english tokenizer from SpaCy
+python -m spacy download en
+```
+
 
 ## Training
 ```shell
@@ -27,7 +42,8 @@ Model | multinli-dev-matched | multinli-dev-mismatched | pretrained-model
   # Training a BiLSTM model on multinli dataset
   python train.py -m bilstm -d multinli
 ```
-
+* Training script will create log, training.log which can be found in results_dir(default: results).
+* In the first run it will take quite bit time(approx: 30 mins) because the script will download the dataset and Glove word vector. For the subsequent runs it will use the saved dataset and word vector so it will be fast.
 ## Evaluation
 ```shell
   # Evaluating a trained BiLSTM model on snli dataset
@@ -36,8 +52,7 @@ Model | multinli-dev-matched | multinli-dev-mismatched | pretrained-model
   # Evalauting a trained BiLSTM model on multinli dataset
   python evaluate.py -m bilstm -d multinli
 ```
-
-Evaluation script will print and log(evaluation.log can be found in results_dir) following metrics:
+* Evaluation script will print and log(evaluation.log can be found in results_dir) following metrics:
 #### Accuracy
 ```ruby
 +------------+----------+
@@ -47,7 +62,6 @@ Evaluation script will print and log(evaluation.log can be found in results_dir)
 |    test    |  77.412  |
 +------------+----------+
 ```
-
 #### Label wise Accuracy
 ```ruby
 +---------------+----------+
@@ -58,7 +72,6 @@ Evaluation script will print and log(evaluation.log can be found in results_dir)
 |    neutral    |  72.352  |
 +---------------+----------+
 ```
-
 #### Confusion Matrix
 ```ruby
 +----------------------+-----------------+--------------------+--------------+-------+
@@ -72,5 +85,16 @@ Evaluation script will print and log(evaluation.log can be found in results_dir)
 ```
 
 ## Evaluate on Pre-trained models
+```shell
+# Download and use the pretrained BiLSTM model on SNLI dataset
+python scripts/download_pretrained.py -m bilstm -d snli
+python evaluate.py -m bilstm -d snli
 
-## Contribution
+# Download and use the pretrained BiLSTM model on MultiNLI dataset
+python scripts/download_pretrained.py -m bilstm -d multinli
+python evaluate.py -m bilstm -d multinli
+```
+
+## Contribution Note
+I am actively maintaining this repository and adding options for more models and dataset. Please create an issue if you are looking for specific model or dataset.
+
