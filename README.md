@@ -9,13 +9,13 @@ Model | Dataset
 |   -  | MultiNLI [[Website]](https://www.nyu.edu/projects/bowman/multinli/) [[Paper]](https://cims.nyu.edu/~sbowman/multinli/paper.pdf)
 
 #### Results
-Model | snli-validation | snli-test | pretrained-model
-----|----|----|----|
-`BiLSTM ` | 84.24 | 62.419 | download link |
+Model | snli-validation | snli-test |
+----|----|----|
+`BiLSTM ` | 84.515 | 84.151 |
 
-Model | multinli-dev-matched | multinli-dev-mismatched | pretrained-model
-----|----|----|----|
-`BiLSTM ` | 70.63 | 62.419 | download link |
+Model | multinli-dev-matched | multinli-dev-mismatched |
+----|----|----|
+`BiLSTM ` | 71.075 | 70.555 |
 
 ## Setup
 #### conda:
@@ -56,10 +56,10 @@ python -m spacy download en
 #### Accuracy
 ```ruby
 +------------+----------+
-|            | accuracy |
+|    data    | accuracy |
 +------------+----------+
-| validation |  77.271  |
-|    test    |  77.412  |
+| validation |  84.515  |
+|    test    |  84.151  |
 +------------+----------+
 ```
 #### Label wise Accuracy
@@ -67,9 +67,9 @@ python -m spacy download en
 +---------------+----------+
 |     label     | accuracy |
 +---------------+----------+
-|   entailment  |  85.986  |
-| contradiction |  73.525  |
-|    neutral    |  72.352  |
+|   entailment  |  86.876  |
+| contradiction |  85.326  |
+|    neutral    |  80.118  |
 +---------------+----------+
 ```
 #### Confusion Matrix
@@ -77,10 +77,10 @@ python -m spacy download en
 +----------------------+-----------------+--------------------+--------------+-------+
 |   confusion-matrix   | entailment-pred | contradiction-pred | neutral-pred | total |
 +----------------------+-----------------+--------------------+--------------+-------+
-|  entailment-actual   |       2896      |        121         |     351      |  3368 |
-| contradiction-actual |       358       |        2380        |     499      |  3237 |
-|    neutral-actual    |       589       |        301         |     2329     |  3219 |
-|        total         |       3843      |        2802        |     3179     |  9824 |
+|  entailment-actual   |       2926      |         93         |     349      |  3368 |
+| contradiction-actual |       166       |        2762        |     309      |  3237 |
+|    neutral-actual    |       355       |        285         |     2579     |  3219 |
+|        total         |       3447      |        3140        |     3237     |  9824 |
 +----------------------+-----------------+--------------------+--------------+-------+
 ```
 

@@ -50,6 +50,7 @@ class Evaluate():
 		for i, row in enumerate(confusion_matrix):
 			table.add_row([row_label[i]] + [int(count) for count in row] )
 		print(table)
+		self.logger.info(table)
 
 	def label_wise_accuracy(self, lable_map, confusion_matrix):
 		table = PrettyTable()
@@ -58,6 +59,7 @@ class Evaluate():
 			acc = round((100. * confusion_matrix[value][value]/confusion_matrix[value].sum()).item(), 3)
 			table.add_row([label, acc])
 		print(table)
+		self.logger.info(table)
 
 	def evaluate(self):
 		self.model.eval(); self.dataset.test_iter.init_epoch()
@@ -89,6 +91,7 @@ class Evaluate():
 		table.add_row(["validation", round(self.validation_accuracy, 3)])
 		table.add_row(["test", round(test_acc, 3)])
 		print(table)
+		self.logger.info(table)
 		lable_map = self.dataset.labels()
 		self.label_wise_accuracy(lable_map, confusion_matrix)
 		self.print_confusion_matrix(lable_map.keys(), confusion_matrix)

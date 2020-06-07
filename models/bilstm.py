@@ -1,6 +1,6 @@
 import torch
 import torch.nn as nn
-import pdb
+from pdb import set_trace
 
 __all__ = ['bilstm']
 
